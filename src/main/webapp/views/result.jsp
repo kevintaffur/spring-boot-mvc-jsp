@@ -7,6 +7,8 @@
         <title>Spring Boot MVC using JSP</title>
     </head>
     <body>
-        Result is: ${total}
+        Result is: ${alien}
+        <br/>
+        Welcome back friend! How are you, ${name}
     </body>
 </html>

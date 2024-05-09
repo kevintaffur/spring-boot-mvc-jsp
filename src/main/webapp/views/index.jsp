@@ -8,9 +8,9 @@
     </head>
     <body>
         Welcome my friend...
-        <form action="sum" method="post">
-            Enter 1st number: <input type="text" name="num1"></br>
-            Enter 2nd number: <input type="text" name="num2"></br>
+        <form action="add" method="post">
+            Enter your id: <input type="text" name="id"></br>
+            Enter your name: <input type="text" name="name"></br>
             <input type="submit">
         </form>
     </body>

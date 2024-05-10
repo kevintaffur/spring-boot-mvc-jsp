@@ -1,16 +1,24 @@
 package com.example.SpringBootMVCJSP.controllers;
 
 import com.example.SpringBootMVCJSP.models.Alien;
+import com.example.SpringBootMVCJSP.repositories.AlienRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.server.PathParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
+    @Autowired
+    private AlienRepository alienRepository;
 
     // @ModelAttribute methods are executed first (before the mapping methods)
     @ModelAttribute
@@ -21,6 +29,24 @@ public class HomeController {
     @GetMapping
     public String home() {
         return "index";
+    }
+
+    @GetMapping("aliens")
+    public String getAll(Model model) {
+        model.addAttribute("aliens", alienRepository.findAll());
+        return "aliens";
+    }
+
+    @GetMapping("aliens/{id}")
+    public String getAlien(@PathVariable("id") int id, Model model) {
+        model.addAttribute("alien", alienRepository.findById(id));
+        return "show";
+    }
+
+    @GetMapping("aliens-by-name")
+    public String getAlienByName(@PathParam("name") String name, Model model) {
+        model.addAttribute("alien", alienRepository.find(name));
+        return "show";
     }
 
 //    @PostMapping("sum")
@@ -34,7 +60,7 @@ public class HomeController {
 //
 //        HttpSession session = request.getSession();
 //        session.setAttribute("total", total);
-//        return "result.jsp";
+//        return "show.jsp";
 //    }
 
 //    @PostMapping("sum")
@@ -43,7 +69,7 @@ public class HomeController {
 //        int total = num1 + num2;
 //
 //        session.setAttribute("total", total);
-//        return "result.jsp";
+//        return "show.jsp";
 //    }
 
     // Directory src/webapp is public. We can search for localhost:8080/index.jsp and it will show the file
@@ -73,11 +99,12 @@ public class HomeController {
 //        return "result";
 //    }
 
-    @PostMapping("add")
+    @PostMapping("aliens")
     // If @ModelAttribute("name") is set "name" is how it can be accessed in the view
     // If not, the attribute can be accessed with the class name
-    public String add(@ModelAttribute Alien alien) {
+    public String createAlien(@ModelAttribute Alien alien) {
         // @ModelAttribute adds the attribute (alien) automatically to the model
-        return "result";
+        alienRepository.save(alien);
+        return "show";
     }
 }

@@ -14,7 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Arrays;
 import java.util.List;
 
-@Controller
+// Not a controller anymore. As I want to use AlienController to send data, not jsp
+//@Controller
 @RequestMapping("/")
 public class HomeController {
     @Autowired

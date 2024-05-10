@@ -49,7 +49,14 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-
+<!--		This dependency is needed to work with xml responses.-->
+<!--		jackson-dataformat-xml version must match Jackson version-->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.15.4</version>
+		</dependency>
 
 	</dependencies>
 
